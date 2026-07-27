@@ -1,4 +1,4 @@
-public class FitnessAssertionTest {
+public class StudentAssertionTest {
 
     public static void main(String[] args) {
 
