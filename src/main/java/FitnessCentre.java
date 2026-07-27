@@ -1,10 +1,14 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 // =====================================
 // FitnessCentre.java
 // =====================================
 public class FitnessCentre {
     //Variables declaration
+    private String centreName;
+    private String registrationNumber;
     
     // Constructor: initialises the centre with its name and registration number
     public FitnessCentre(String centreName, String registrationNumber) {
