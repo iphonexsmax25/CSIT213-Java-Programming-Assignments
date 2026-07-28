@@ -10,13 +10,14 @@ public class FitnessClass {
      private int durationsMinutes;
      private ArrayList<Member> participants;
      public static int maxParticipants = 2;
+    private final int durationMinutes;
      
    	
     // Constructor: initialises a class with its name, activity type, and duration
     public FitnessClass(String className, String activityType, int durationMinutes) {
         this.className = className;
         this. activityType = activityType;
-        this.durationsMinutes = durationMinutes;
+        this.durationMinutes = durationMinutes;
         this.participants = new ArrayList<Member>();
     }
 
