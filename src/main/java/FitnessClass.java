@@ -16,7 +16,7 @@ public class FitnessClass {
     // Constructor: initialises a class with its name, activity type, and duration
     public FitnessClass(String className, String activityType, int durationMinutes) {
         this.className = className;
-        this. activityType = activityType;
+        this.activityType = activityType;
         this.durationMinutes = durationMinutes;
         this.participants = new ArrayList<Member>();
     }

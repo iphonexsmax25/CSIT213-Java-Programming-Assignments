@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 // =====================================
 // FitnessCouncil.java
@@ -6,12 +7,31 @@ import java.util.*;
 public class FitnessCouncil {
 
     // Variables Declaration
+    private ArrayList<FitnessCentre> centres;
+    
+    // Constructor: starts with no centre registered 
+    public FitnessCouncil(){
+        centres = new ArrayList<FitnessCentre>();
+    }
+    // Private Helper: case-insensitive lookup of a centre 
+    //( kept private and reused by several public methods below - avoids duplicated logic ) 
+    private FitnessCentre  findCentre(String centreName){
+        if (centreName == null){
+            return null;
+        }
+        for (FitnessCentre centre :centres){
+            if (centre.getCentreName().equalsIgnoreCase(centreName)){
+                
+            }
+        }
+    }
 
     // =========================
     // Register Centre
     // =========================
     // Registers a new centre, rejecting nulls and duplicate centre names (case-insensitive)
     public boolean registerCentre(FitnessCentre c) {
+        
     }
 
     // =========================

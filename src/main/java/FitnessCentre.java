@@ -31,6 +31,7 @@ public class FitnessCentre {
             list = new ArrayList<FitnessClass>();
             classes.put(activityType, list);
         } else{
+            // check for a duplicate classname within this activityType
             for (FitnessClass existing : list) {
                 if (existing.getClassName().equalsIgnoreCase(c.getClassName())) {
                     return false;
@@ -48,22 +49,39 @@ public class FitnessCentre {
         }
         for (String activityType : classes.keySet()){
             ArrayList<FitnessClass> list = classes.get(activityType);
+            for(int i = 0;i< list.size(); i++){
+                if (list.get(i).getClassName().equalsIgnoreCase(className)){
+                    list.remove(i);
+                    if (list.isEmpty()){
+                        classes.remove(activityType); // drop the key once its list is empty
+                    }
+                    return true; 
+                }
+            }
+            
         }
                 
-                
+        return false;        
     }
 
     // Returns the full map of classes, grouped by activity type
     public HashMap<String, ArrayList<FitnessClass>> getClasses() {
         // never null; empty map when there are no classes
+        return classes;
     }
 
     // Returns the classes for a given activity type
     public ArrayList<FitnessClass> getClassesByActivity(String activityType) {
+        ArrayList<FitnessClass> list =  classes.get(activityType);
+        if (list == null){
+            return new ArrayList<FitnessClass>();
+        }
+         return list; 
     }
 
     // Returns the centre's name
     public String getCentreName() {
+        return centreName;
     }
 
     // Builds a summary string with the centre name and registration number

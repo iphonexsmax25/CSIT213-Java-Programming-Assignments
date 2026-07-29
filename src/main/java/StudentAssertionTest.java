@@ -249,5 +249,66 @@ public class StudentAssertionTest {
     public static void testFitnessCouncil_Negative() {
        //Think of the negative cases and write the test case here to
        //stress test your codes.
+       // Use a brand new council so this test is independent of testFitnessCouncil_Positive()
+        FitnessCouncil council = new FitnessCouncil();
+
+        // ---- registerCentre: null ----
+        assert !council.registerCentre(null) : "registerCentre(null) must return false";
+        assert council.getCentres().isEmpty() : "Council should still be empty after rejecting null";
+
+        // ---- registerCentre: duplicate name (case-insensitive) ----
+        FitnessCentre c1 = new FitnessCentre("IronWorks", "FC-2026-001");
+        FitnessCentre c1Duplicate = new FitnessCentre("ironworks", "FC-2026-999"); // same name, different case
+        assert council.registerCentre(c1) : "First registration of IronWorks should succeed";
+        assert !council.registerCentre(c1Duplicate)
+                : "Duplicate centre name (case-insensitive) must be rejected";
+        assert council.getCentres().size() == 1 : "Council should still only have 1 centre";
+
+        // ---- getCentres(): never null, even when empty ----
+        FitnessCouncil emptyCouncil = new FitnessCouncil();
+        assert emptyCouncil.getCentres() != null : "getCentres() must never return null";
+        assert emptyCouncil.getCentres().isEmpty() : "Fresh council should have no centres";
+
+        // ---- getAllClassNames(): empty council / centre with no classes ----
+        assert emptyCouncil.getAllClassNames() != null : "getAllClassNames() must never return null";
+        assert emptyCouncil.getAllClassNames().isEmpty() : "No centres -> no class names";
+        assert council.getAllClassNames().isEmpty() : "IronWorks has no classes yet -> empty list";
+
+        // ---- getClassesByCentre(): unknown centre name and null ----
+        assert council.getClassesByCentre("Some Unknown Centre") != null
+                : "Unknown centre should give empty list, not null";
+        assert council.getClassesByCentre("Some Unknown Centre").isEmpty()
+                : "Unknown centre should give empty list";
+        assert council.getClassesByCentre(null) != null
+                : "getClassesByCentre(null) must not return null";
+        assert council.getClassesByCentre(null).isEmpty()
+                : "getClassesByCentre(null) should give an empty list";
+
+        // ---- getActivitiesByCentre(): unknown centre name and null ----
+        assert council.getActivitiesByCentre("Some Unknown Centre") != null
+                : "getActivitiesByCentre() must never return null";
+        assert council.getActivitiesByCentre("Some Unknown Centre").isEmpty()
+                : "Unknown centre should give an empty activity map";
+        assert council.getActivitiesByCentre(null) != null
+                : "getActivitiesByCentre(null) must not return null";
+        assert council.getActivitiesByCentre(null).isEmpty()
+                : "getActivitiesByCentre(null) should give an empty map";
+
+        // ---- getClassesByActivity(): activity type that does not exist anywhere ----
+        assert council.getClassesByActivity("Pilates") != null
+                : "getClassesByActivity() must never return null";
+        assert council.getClassesByActivity("Pilates").isEmpty()
+                : "No centre offers Pilates yet -> empty list";
+        assert council.getClassesByActivity(null) != null
+                : "getClassesByActivity(null) must not return null";
+        assert council.getClassesByActivity(null).isEmpty()
+                : "getClassesByActivity(null) should give an empty list";
+
+        // ---- Sanity check: registering a second, genuinely different centre still works ----
+        FitnessCentre c2 = new FitnessCentre("ZenFlow Studio", "FC-2026-002");
+        assert council.registerCentre(c2) : "A distinctly-named centre should register successfully";
+        assert council.getCentres().size() == 2 : "Council should now have 2 distinct centres";
+
+        System.out.println("All FitnessCouncil NEGATIVE assertions passed.");
     }
 }
