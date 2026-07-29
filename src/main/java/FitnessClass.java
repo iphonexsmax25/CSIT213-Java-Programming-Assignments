@@ -7,10 +7,11 @@ public class FitnessClass {
    	// Variables Declaration
      private String className;
      private String activityType;
-     private int durationsMinutes;
+     private int durationMinutes;
      private ArrayList<Member> participants;
      public static int maxParticipants = 2;
-    private final int durationMinutes;
+    
+    
      
    	
     // Constructor: initialises a class with its name, activity type, and duration
@@ -72,7 +73,7 @@ public class FitnessClass {
     }
 
     // Builds a summary string with name, activity, duration, and enrolment count
-    @Override
+   @Override
     public String toString() {
         return className + " | " + activityType + " | " + durationMinutes + " mins | "
                 + participants.size() + "/" + maxParticipants + " enrolled";
