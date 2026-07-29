@@ -11,8 +11,6 @@ public class FitnessClass {
      private ArrayList<Member> participants;
      public static int maxParticipants = 2;
     
-    
-     
    	
     // Constructor: initialises a class with its name, activity type, and duration
     public FitnessClass(String className, String activityType, int durationMinutes) {
