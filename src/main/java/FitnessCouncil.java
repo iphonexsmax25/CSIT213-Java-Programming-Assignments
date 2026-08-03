@@ -9,20 +9,7 @@ public class FitnessCouncil {
     // Variables Declaration
     private ArrayList<FitnessCentre> centres = new ArrayList<>();
     
-    // Private Helper: case-insensitive lookup of a centre 
-    //( kept private and reused by several public methods below - avoids duplicated logic ) 
-    private FitnessCentre  findCentre(String centreName){
-        if (centreName == null){
-            return null;
-        }
-        for (FitnessCentre centre :centres){
-            if (centre.getCentreName().equalsIgnoreCase(centreName)){
-                return centre;
-            }
-        }
-        return null;
-    }
-
+    
     // =========================
     // Register Centre
     // =========================
@@ -31,13 +18,14 @@ public class FitnessCouncil {
         if (c == null){
             return false;
         }
-        if(findCentre(c.getCentreName()) != null){
-            return false; // 
+        for (FitnessCentre existing : centres){
+            if(existing.getCentreName().equalsIgnoreCase(c.getCentreName())){
+                return false; 
+            }
+            
         }
         centres.add(c);
         return true;
-        
-        
     }
 
     // =========================
@@ -55,14 +43,16 @@ public class FitnessCouncil {
     // Collects every class name across all centres, keeping duplicates
     public ArrayList<String> getAllClassNames() {
         ArrayList<String> names = new ArrayList<String>();
-        for (FitnessCentre centre :centres){
-            for (ArrayList<FitnessClass> list : centre.getClasses().values()){
+        for (FitnessCentre centre : centres){
+            HashMap<String, ArrayList<FitnessClass>> activityMap = centre.getClasses();
+            for(ArrayList<FitnessClass> list : activityMap.values()){
                 for (FitnessClass fc : list){
                     names.add(fc.getClassName());
                 }
             }
         }
-        return names;
+         return names;
+           
     }
 
     // =========================
@@ -70,14 +60,14 @@ public class FitnessCouncil {
     // =========================
     // Returns all class names for the centre matching the given name (case-insensitive)
     public ArrayList<String> getClassesByCentre(String centreName) {
-        // centre not found -> empty list
-        ArrayList<String> names = new ArrayList<String>();
-        FitnessCentre centre = findCentre(centreName);
-        if (centre == null){
-            return names;
+        FitnessCentre found = findCentre(centreName);
+        ArrayList<String> names = new ArrayList<>();
+        if (found == null) {
+            return names; // centre not found -> empty list
         }
-        for (ArrayList<FitnessClass> list : centre.getClasses().values()){
-            for (FitnessClass fc : list ){
+
+        for (ArrayList<FitnessClass> list : found.getClasses().values()) {
+            for (FitnessClass fc : list) {
                 names.add(fc.getClassName());
             }
         }
@@ -89,12 +79,11 @@ public class FitnessCouncil {
     // =========================
     // Returns the activity-to-classes map for the centre matching the given name
     public HashMap<String, ArrayList<FitnessClass>> getActivitiesByCentre(String centreName) {
-        // centre not found -> empty list
-        FitnessCentre centre = findCentre(centreName);
-        if (centre == null){
-            return new HashMap<String, ArrayList<FitnessClass>>();
+        FitnessCentre found = findCentre(centreName);
+        if (found == null) {
+            return new HashMap<>(); // centre not found -> empty map
         }
-        return centre.getClasses();
+        return found.getClasses();
     }
 
     // =========================
@@ -102,15 +91,33 @@ public class FitnessCouncil {
     // =========================
     // Collects unique class names for a given activity type across all centres
     public ArrayList<String> getClassesByActivity(String activityType) {
-        ArrayList<String> names = new ArrayList<String>();
-        for (FitnessCentre centre : centres){
+        ArrayList<String> uniqueNames = new ArrayList<>();
+
+        for (FitnessCentre centre : centres) {
             ArrayList<FitnessClass> list = centre.getClassesByActivity(activityType);
-            for(FitnessClass fc: list){
-                if(!names.contains(fc.getClassName())){
-                    names.add(fc.getClassName());
+            for (FitnessClass fc : list) {
+                String name = fc.getClassName();
+                // Only add if we haven't already recorded this class name.
+                if (!uniqueNames.contains(name)) {
+                    uniqueNames.add(name);
                 }
             }
         }
-        return names;
+        return uniqueNames;
+    }
+
+    // ---- Private helper: shared by several methods above ----
+    // Not part of the spec's public API, but avoids repeating the same
+    // case-insensitive search loop three times.
+    private FitnessCentre findCentre(String centreName) {
+        if (centreName == null) {
+            return null;
+        }
+        for (FitnessCentre centre : centres) {
+            if (centre.getCentreName().equalsIgnoreCase(centreName)) {
+                return centre;
+            }
+        }
+        return null;
     }
 }
