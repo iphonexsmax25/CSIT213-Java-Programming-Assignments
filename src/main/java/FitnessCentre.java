@@ -15,7 +15,7 @@ public class FitnessCentre {
     public FitnessCentre(String centreName, String registrationNumber) {
         this.centreName = centreName;
         this.registrationNumber = registrationNumber;
-        this.classes = new HashMap<String, ArrayList<FitnessClass>>();
+        this.classes = new HashMap<>();
     }
 
     // Adds a class to the centre, rejecting nulls and duplicate class names (case-insensitive)
