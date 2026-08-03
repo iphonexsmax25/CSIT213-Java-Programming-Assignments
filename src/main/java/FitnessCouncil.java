@@ -7,12 +7,8 @@ import java.util.HashMap;
 public class FitnessCouncil {
 
     // Variables Declaration
-    private ArrayList<FitnessCentre> centres;
+    private ArrayList<FitnessCentre> centres = new ArrayList<>();
     
-    // Constructor: starts with no centre registered 
-    public FitnessCouncil(){
-        centres = new ArrayList<FitnessCentre>();
-    }
     // Private Helper: case-insensitive lookup of a centre 
     //( kept private and reused by several public methods below - avoids duplicated logic ) 
     private FitnessCentre  findCentre(String centreName){
