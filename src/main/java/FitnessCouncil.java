@@ -36,8 +36,7 @@ public class FitnessCouncil {
         for (FitnessCentre existing : centres){
             if(existing.getCentreName().equalsIgnoreCase(c.getCentreName())){
                 return false; 
-            }
-            
+            }  
         }
         centres.add(c);
         return true;
