@@ -4,9 +4,13 @@ import java.time.*;
 import java.time.format.*;
 
 public class CityAirStat {
+    private ArrayList<AirQualityReading> readings;
+    private ArrayList<String> errors;
     
 
 	public CityAirStat() {
+            readings = new ArrayList<>();
+            errors = new ArrayList<>();
 
 	}
 
