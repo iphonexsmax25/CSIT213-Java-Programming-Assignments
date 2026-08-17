@@ -1,0 +1,20 @@
+2026-02-05,S001,North,35.2
+2026-02-05,S002,North,40.6
+2026-02-05,S003,North,38.1
+2026-02-05,S001,South,55.0
+2026-02-05,S002,South,48.3
+2026-02-05,S003,South,52.4
+2026-02-06,S001,North,30.4
+2026-02-06,S002,North,28.8
+2026-02-06,S003,North,33.5
+2026-02-06,S001,South,45.1
+2026-02-06,S002,South,47.6
+2026-02-06,S003,South,44.0
+#invalid date
+2026-13-05,S101,South,42.0
+#Invalid PM2.5
+2026-02-06,S101,South,XYZ
+#Invalid PM2.5 - out of range
+2026-02-06,S101,South,-5.0
+#multiple errors in one line: bad date + empty sensor id
+2026-02-99,,South,520.0
