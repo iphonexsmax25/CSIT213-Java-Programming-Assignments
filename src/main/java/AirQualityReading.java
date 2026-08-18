@@ -1,25 +1,9 @@
 import java.time.LocalDate;
 
 public class AirQualityReading {
-    private String sensorId;
-    private String district;
-    private LocalDate readingDate;
-    private double pm25;
-    
 
     public AirQualityReading(String sensorId, String district, LocalDate readingDate,
                              double pm25) throws AirQualityDataException {
-        if (readingDate == null){
-            throw new AirQualityDataException("Invalid Reading Date");
-        }
-        if (pm25 < 0.0 || pm25 >500.0){
-            throw new AirQualityDataException("Invalid PM2.5" + pm25);
-        }
-        
-        this.sensorId = sensorId;
-        this.district = district;
-        this.readingDate = readingDate;
-        this.pm25 = pm25;
     }
 
     public String getSensorId() {
