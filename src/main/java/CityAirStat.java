@@ -151,6 +151,15 @@ public class CityAirStat {
 	}
 
 	public void process(Analyser analyser) {
+            HashMap<String, Double> results = analyser.process(readings);
+            
+            try(PrintWriter writer = new PrintWriter(new FileWriter("results.txt"))) {
+                for (String key : results.keySet()){
+                    writer.println(key + " : " + results.get(key));
+                }
+            } catch (IOException e){
+                System.out.println("Unable to write results.txt " + e.getMessage());
+            }
 	}
 
 	public static void main(String[] args) {
