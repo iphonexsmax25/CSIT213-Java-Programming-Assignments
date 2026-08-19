@@ -1,0 +1,5 @@
+Line14: Invalid Reading Date
+Line 16: Invalid PM@.5
+Line 18: Invalid PM2.5: -5.0
+Line20: Invalid Reading Date
+Line 20: Invalid Sensor ID
