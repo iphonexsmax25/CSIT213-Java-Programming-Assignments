@@ -48,7 +48,7 @@ public class CityAirStat {
                     // fallback for d/M/yy (e.g. Excel-mangled dates like 5/2/26).
                     LocalDate reading = parseDate(dateStr);
                     if (reading == null){
-                        errors.add ("Line" + lineNumber + ": Invalid Reading Date");
+                        errors.add ("Line " + lineNumber + ": Invalid Reading Date");
                         lineIsValid = false;
                     }
                     
@@ -60,7 +60,7 @@ public class CityAirStat {
                     
                     // Validate  district: must mot be empty
                     if (district.isEmpty()){
-                        errors.add("Line" + lineNumber + "Invalid District");
+                        errors.add("Line " + lineNumber + "Invalid District");
                         lineIsValid = false;
                     } 
                     

@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.HashMap;
-import java.util.ArrayList;
 public class DistrictAirQualityAnalyser implements Analyser {
 
 	@Override

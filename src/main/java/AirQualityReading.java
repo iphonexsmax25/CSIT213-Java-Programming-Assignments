@@ -10,7 +10,7 @@ public class AirQualityReading {
     public AirQualityReading(String sensorId, String district, LocalDate readingDate,
                              double pm25) throws AirQualityDataException {
         if (readingDate == null){
-            throw new AirQualityDataException("Invalid Reading Data");
+            throw new AirQualityDataException("Invalid Reading Date");
         }
         
         if (pm25 < 0.0 ||pm25 >500.0){
