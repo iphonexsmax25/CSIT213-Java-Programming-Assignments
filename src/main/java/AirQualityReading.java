@@ -51,8 +51,12 @@ public class AirQualityReading {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof AirQualityReading)) return false;
+        if (this == obj) 
+            return true;
+        if ( obj == null || getClass() != obj.getClass()){
+            return false;
+        }
+            
 
         AirQualityReading other = (AirQualityReading) obj;
         return sensorId.equals(other.sensorId)
